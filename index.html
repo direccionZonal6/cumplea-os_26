@@ -1,246 +1,298 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard Calendario 2026</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Calendario Honomásticos 2026</title>
 
   <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Bootstrap Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
   <style>
+
     body{
-      background:#f4f7fb;
-      font-family:'Segoe UI',sans-serif;
+      background: #eef2f7;
+      font-family: 'Segoe UI', sans-serif;
     }
 
-    .dashboard-header{
-      background:linear-gradient(135deg,#0d6efd,#0b5ed7);
-      color:white;
-      border-radius:20px;
-      padding:25px;
-      margin-bottom:25px;
-      box-shadow:0 10px 30px rgba(0,0,0,.15);
+    .dashboard{
+      min-height: 100vh;
     }
 
-    .calendar-card{
-      background:white;
-      border-radius:20px;
-      box-shadow:0 4px 15px rgba(0,0,0,.08);
-      overflow:hidden;
+    /* SIDEBAR */
+
+    .sidebar{
+      background: #1f2937;
+      color: white;
+      min-height: 100vh;
+      padding: 25px 20px;
+      box-shadow: 4px 0 12px rgba(0,0,0,0.08);
     }
 
-    .calendar-header{
-      background:#0d6efd;
-      color:white;
-      padding:15px;
+    .sidebar-title{
+      font-size: 1.6rem;
+      font-weight: bold;
+      margin-bottom: 25px;
     }
 
-    .week-days{
-      display:grid;
-      grid-template-columns:repeat(7,1fr);
-      background:#eef3ff;
-      font-weight:600;
-      text-align:center;
-      padding:10px 0;
-      color:#0d6efd;
-    }
-
-    .calendar-grid{
-      display:grid;
-      grid-template-columns:repeat(7,1fr);
-      gap:1px;
-      background:#dee2e6;
-    }
-
-    .day{
-      min-height:120px;
-      background:white;
-      padding:8px;
-      position:relative;
-      transition:.2s;
-      cursor:pointer;
-    }
-
-    .day:hover{
-      background:#f8fbff;
-      transform:scale(1.01);
-      z-index:2;
-    }
-
-    .day-number{
-      font-weight:700;
-      color:#0d6efd;
-      margin-bottom:8px;
-      font-size:15px;
-    }
-
-    .other-month{
-      background:#f5f5f5;
-      color:#adb5bd;
-    }
-
-    .today{
-      border:2px solid #0d6efd;
-    }
-
-    .event-label{
-      font-size:12px;
-      padding:4px 8px;
-      border-radius:10px;
-      color:white;
-      margin-bottom:4px;
-      display:block;
-      word-break:break-word;
-    }
-
-    .event-blue{
-      background:#0d6efd;
-    }
-
-    .event-green{
-      background:#198754;
-    }
-
-    .event-red{
-      background:#dc3545;
-    }
-
-    .event-orange{
-      background:#fd7e14;
-    }
-
-    .control-panel{
-      background:white;
-      border-radius:20px;
-      padding:20px;
-      box-shadow:0 4px 15px rgba(0,0,0,.08);
-    }
-
-    .month-title{
-      font-size:1.5rem;
-      font-weight:700;
+    .sidebar label{
+      font-weight: 600;
+      margin-bottom: 10px;
     }
 
     .legend-box{
-      width:16px;
-      height:16px;
-      border-radius:4px;
-      display:inline-block;
-      margin-right:6px;
+      margin-top: 35px;
     }
 
-    @media(max-width:768px){
-      .day{
-        min-height:90px;
-        font-size:12px;
+    .legend-item{
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+    }
+
+    .legend-color{
+      width: 18px;
+      height: 18px;
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+
+    .bg-primary-custom{
+      background: #0d6efd;
+    }
+
+    .bg-success-custom{
+      background: #198754;
+    }
+
+    .bg-danger-custom{
+      background: #dc3545;
+    }
+
+    .bg-warning-custom{
+      background: #fd7e14;
+    }
+
+    .bg-purple-custom{
+      background: #6f42c1;
+    }
+
+    /* CONTENT */
+
+    .content{
+      padding: 30px;
+    }
+
+    .calendar-card{
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+    }
+
+    .calendar-header{
+      background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+      color: white;
+      padding: 20px;
+    }
+
+    .calendar-header h2{
+      margin: 0;
+      font-weight: bold;
+    }
+
+    table{
+      margin-bottom: 0;
+    }
+
+    th{
+      background: #f1f5f9;
+      text-align: center;
+      color: #374151;
+      font-size: 0.95rem;
+    }
+
+    td{
+      height: 120px;
+      width: 14.2%;
+      vertical-align: top;
+      padding: 8px;
+      background: white;
+      transition: 0.2s;
+    }
+
+    td:hover{
+      background: #edf5ff;
+    }
+
+    .empty{
+      background: #f8fafc;
+    }
+
+    .day-number{
+      font-weight: bold;
+      color: #111827;
+      margin-bottom: 6px;
+      font-size: 1rem;
+    }
+
+    /* EVENTOS */
+
+    .event{
+      display: block;
+      padding: 4px 7px;
+      border-radius: 8px;
+      font-size: 0.72rem;
+      color: white;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    .event-primary{
+      background: #0d6efd;
+    }
+
+    .event-success{
+      background: #198754;
+    }
+
+    .event-danger{
+      background: #dc3545;
+    }
+
+    .event-warning{
+      background: #fd7e14;
+    }
+
+    .event-purple{
+      background: #6f42c1;
+    }
+
+    @media(max-width:991px){
+
+      .sidebar{
+        min-height: auto;
       }
 
-      .event-label{
-        font-size:10px;
+      td{
+        height: 90px;
+      }
+
+      .event{
+        font-size: 0.60rem;
       }
     }
+
   </style>
 </head>
 
 <body>
 
-<div class="container py-4">
+<div class="container-fluid dashboard">
 
-  <!-- HEADER -->
-  <div class="dashboard-header">
-    <div class="d-flex flex-wrap justify-content-between align-items-center">
-      <div>
-        <h2 class="fw-bold mb-1">
-          <i class="bi bi-calendar3"></i>
-          Calendario Honomásticos 2026
-        </h2>
-        <p class="mb-0">
-          Calendario 2026 
-        </p>
+  <div class="row">
+
+    <!-- SIDEBAR -->
+    <div class="col-lg-3 sidebar">
+
+      <div class="sidebar-title">
+        <i class="bi bi-calendar-event"></i>
+        Cumpleaños 2026
       </div>
 
-      <div class="mt-3 mt-md-0">
-        <select id="monthSelector" class="form-select form-select-lg">
+      <!-- SELECTOR -->
+      <div class="mb-4">
+
+        <label>
+          Seleccionar Mes
+        </label>
+
+        <select id="monthSelector" class="form-select">
+
+          <option value="0">Enero</option>
+          <option value="1">Febrero</option>
+          <option value="2">Marzo</option>
+          <option value="3">Abril</option>
+          <option value="4">Mayo</option>
+          <option value="5">Junio</option>
+          <option value="6">Julio</option>
+          <option value="7">Agosto</option>
+          <option value="8">Septiembre</option>
+          <option value="9">Octubre</option>
+          <option value="10">Noviembre</option>
+          <option value="11">Diciembre</option>
+
         </select>
+
       </div>
+
+      <!-- LEYENDA -->
+      <div class="legend-box">
+
+        <h5 class="mb-3">
+          Leyenda de Etiquetas
+        </h5>
+
+        <div class="legend-item">
+          <div class="legend-color bg-primary-custom"></div>
+          Reuniones
+        </div>
+
+        <div class="legend-item">
+          <div class="legend-color bg-success-custom"></div>
+          Capacitaciones
+        </div>
+
+        <div class="legend-item">
+          <div class="legend-color bg-danger-custom"></div>
+          Eventos Oficiales
+        </div>
+
+        <div class="legend-item">
+          <div class="legend-color bg-warning-custom"></div>
+          Cumpleaños
+        </div>
+
+        <div class="legend-item">
+          <div class="legend-color bg-purple-custom"></div>
+          Informes Técnicos
+        </div>
+
+      </div>
+
     </div>
-  </div>
 
-  <div class="row g-4">
+    <!-- CONTENT -->
+    <div class="col-lg-9 content">
 
-    <!-- CALENDARIO -->
-    <div class="col-lg-9">
       <div class="calendar-card">
 
-        <div class="calendar-header d-flex justify-content-between align-items-center">
-          <button class="btn btn-light btn-sm" id="prevMonth">
-            <i class="bi bi-chevron-left"></i>
-          </button>
-
-          <div class="month-title" id="monthYear"></div>
-
-          <button class="btn btn-light btn-sm" id="nextMonth">
-            <i class="bi bi-chevron-right"></i>
-          </button>
+        <div class="calendar-header">
+          <h2 id="monthTitle">Enero 2026</h2>
         </div>
 
-        <div class="week-days">
-          <div>Dom</div>
-          <div>Lun</div>
-          <div>Mar</div>
-          <div>Mié</div>
-          <div>Jue</div>
-          <div>Vie</div>
-          <div>Sáb</div>
-        </div>
+        <table class="table table-bordered mb-0">
 
-        <div class="calendar-grid" id="calendarGrid"></div>
+          <thead>
+            <tr>
+              <th>Lun</th>
+              <th>Mar</th>
+              <th>Mié</th>
+              <th>Jue</th>
+              <th>Vie</th>
+              <th>Sáb</th>
+              <th>Dom</th>
+            </tr>
+          </thead>
 
-      </div>
-    </div>
+          <tbody id="calendarBody"></tbody>
 
-    <!-- PANEL -->
-    <div class="col-lg-3">
-
-      <div class="control-panel">
-
-        <h5 class="fw-bold mb-3">
-          <i class="bi bi-tags"></i>
-          Etiquetas
-        </h5>
-
-        <div class="mb-2">
-          <span class="legend-box bg-primary"></span> Evento
-        </div>
-
-        <div class="mb-2">
-          <span class="legend-box bg-success"></span> Reunión
-        </div>
-
-        <div class="mb-2">
-          <span class="legend-box bg-danger"></span> Importante
-        </div>
-
-        <div class="mb-4">
-          <span class="legend-box bg-warning"></span> Recordatorio
-        </div>
-
-        <hr>
-
-        <div>
-          <h6 class="fw-bold">Instrucciones</h6>
-
-          <ul class="small">
-            <li>Haz clic en cualquier día</li>
-            <li>Agrega una etiqueta personalizada</li>
-            <li>Selecciona un color</li>
-            <li>Las etiquetas se guardan automáticamente</li>
-          </ul>
-        </div>
+        </table>
 
       </div>
 
@@ -249,255 +301,142 @@
   </div>
 
 </div>
-
-<!-- MODAL -->
-<div class="modal fade" id="eventModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <div class="modal-header bg-primary text-white">
-        <h5 class="modal-title">
-          <i class="bi bi-pencil-square"></i>
-          Editar Etiqueta
-        </h5>
-
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-      </div>
-
-      <div class="modal-body">
-
-        <div class="mb-3">
-          <label class="form-label">Fecha</label>
-          <input type="text" class="form-control" id="selectedDate" readonly>
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label">Etiqueta</label>
-          <input type="text" class="form-control" id="eventText" placeholder="Ejemplo: Reunión SENAMHI">
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label">Color</label>
-
-          <select class="form-select" id="eventColor">
-            <option value="event-blue">Azul</option>
-            <option value="event-green">Verde</option>
-            <option value="event-red">Rojo</option>
-            <option value="event-orange">Naranja</option>
-          </select>
-        </div>
-
-      </div>
-
-      <div class="modal-footer">
-        <button class="btn btn-danger" id="deleteEvent">
-          <i class="bi bi-trash"></i>
-          Eliminar
-        </button>
-
-        <button class="btn btn-primary" id="saveEvent">
-          <i class="bi bi-save"></i>
-          Guardar
-        </button>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<!-- Bootstrap -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
 
   const months = [
-    "Enero","Febrero","Marzo","Abril",
-    "Mayo","Junio","Julio","Agosto",
-    "Septiembre","Octubre","Noviembre","Diciembre"
+    "Enero", "Febrero", "Marzo", "Abril",
+    "Mayo", "Junio", "Julio", "Agosto",
+    "Septiembre", "Octubre", "Noviembre", "Diciembre"
   ];
 
-  let currentMonth = new Date().getMonth();
-  let currentYear = 2026;
+  // EVENTOS DE EJEMPLO
 
-  let selectedDateKey = "";
+  const events = {
 
-  const calendarGrid = document.getElementById("calendarGrid");
-  const monthYear = document.getElementById("monthYear");
-  const monthSelector = document.getElementById("monthSelector");
+    "0-1": [
+      { text: "Año Nuevo", class: "event-danger" }
+    ],
 
-  const eventModal = new bootstrap.Modal(
-    document.getElementById("eventModal")
-  );
+    "0-5": [
+      { text: "Reunión General", class: "event-primary" },
+      { text: "Entrega PDF", class: "event-success" }
+    ],
 
-  // Cargar selector
-  months.forEach((month,index)=>{
-    const option = document.createElement("option");
-    option.value = index;
-    option.textContent = month + " 2026";
-    monthSelector.appendChild(option);
+    "0-15": [
+      { text: "Cumpleaños", class: "event-warning" }
+    ],
+
+    "1-14": [
+      { text: "San Valentín", class: "event-danger" }
+    ],
+
+    "2-8": [
+      { text: "Visita Técnica", class: "event-primary" }
+    ],
+
+    "4-10": [
+      { text: "Capacitación", class: "event-success" }
+    ],
+
+    "6-28": [
+      { text: "Fiestas Patrias", class: "event-danger" }
+    ],
+
+    "9-12": [
+      { text: "Informe UV", class: "event-purple" }
+    ]
+
+  };
+
+  const calendarBody = document.getElementById("calendarBody");
+  const monthTitle = document.getElementById("monthTitle");
+  const selector = document.getElementById("monthSelector");
+
+  function generateCalendar(monthIndex){
+
+    calendarBody.innerHTML = "";
+
+    monthTitle.innerHTML = `${months[monthIndex]} 2026`;
+
+    const firstDay = new Date(2026, monthIndex, 1);
+    const lastDate = new Date(2026, monthIndex + 1, 0).getDate();
+
+    let startDay = firstDay.getDay();
+    startDay = startDay === 0 ? 6 : startDay - 1;
+
+    let date = 1;
+
+    for(let i = 0; i < 6; i++){
+
+      let row = document.createElement("tr");
+
+      for(let j = 0; j < 7; j++){
+
+        let cell = document.createElement("td");
+
+        if(i === 0 && j < startDay){
+
+          cell.classList.add("empty");
+
+        }
+        else if(date > lastDate){
+
+          cell.classList.add("empty");
+
+        }
+        else{
+
+          // Numero de día
+          let dayNumber = document.createElement("div");
+          dayNumber.classList.add("day-number");
+          dayNumber.innerHTML = date;
+
+          cell.appendChild(dayNumber);
+
+          // EVENTOS
+          const eventKey = `${monthIndex}-${date}`;
+
+          if(events[eventKey]){
+
+            events[eventKey].forEach(event => {
+
+              let eventDiv = document.createElement("div");
+
+              eventDiv.classList.add("event");
+              eventDiv.classList.add(event.class);
+
+              eventDiv.innerHTML = event.text;
+
+              cell.appendChild(eventDiv);
+
+            });
+
+          }
+
+          date++;
+        }
+
+        row.appendChild(cell);
+      }
+
+      calendarBody.appendChild(row);
+
+      if(date > lastDate){
+        break;
+      }
+    }
+  }
+
+  // Cambio de mes
+  selector.addEventListener("change", function(){
+
+    generateCalendar(parseInt(this.value));
+
   });
 
-  monthSelector.value = currentMonth;
-
-  function getEvents(){
-    return JSON.parse(localStorage.getItem("calendarEvents2026")) || {};
-  }
-
-  function saveEvents(events){
-    localStorage.setItem(
-      "calendarEvents2026",
-      JSON.stringify(events)
-    );
-  }
-
-  function renderCalendar(month){
-
-    calendarGrid.innerHTML = "";
-
-    monthYear.textContent = `${months[month]} 2026`;
-
-    const firstDay = new Date(2026, month, 1).getDay();
-    const daysInMonth = new Date(2026, month + 1, 0).getDate();
-
-    // Dias vacíos
-    for(let i=0; i<firstDay; i++){
-
-      const emptyDay = document.createElement("div");
-      emptyDay.className = "day other-month";
-
-      calendarGrid.appendChild(emptyDay);
-    }
-
-    const events = getEvents();
-
-    // Dias del mes
-    for(let day=1; day<=daysInMonth; day++){
-
-      const dayDiv = document.createElement("div");
-      dayDiv.className = "day";
-
-      const dateKey = `2026-${month+1}-${day}`;
-
-      dayDiv.innerHTML = `
-        <div class="day-number">${day}</div>
-        <div class="events-container"></div>
-      `;
-
-      // Mostrar evento
-      if(events[dateKey]){
-
-        const label = document.createElement("div");
-
-        label.className = `event-label ${events[dateKey].color}`;
-
-        label.textContent = events[dateKey].text;
-
-        dayDiv.querySelector(".events-container")
-              .appendChild(label);
-      }
-
-      // Click
-      dayDiv.addEventListener("click", ()=>{
-
-        selectedDateKey = dateKey;
-
-        document.getElementById("selectedDate").value = dateKey;
-
-        document.getElementById("eventText").value =
-          events[dateKey]?.text || "";
-
-        document.getElementById("eventColor").value =
-          events[dateKey]?.color || "event-blue";
-
-        eventModal.show();
-      });
-
-      calendarGrid.appendChild(dayDiv);
-    }
-  }
-
-  // Guardar evento
-  document.getElementById("saveEvent")
-    .addEventListener("click", ()=>{
-
-      const text = document.getElementById("eventText").value;
-      const color = document.getElementById("eventColor").value;
-
-      const events = getEvents();
-
-      if(text.trim() !== ""){
-
-        events[selectedDateKey] = {
-          text,
-          color
-        };
-
-      } else {
-
-        delete events[selectedDateKey];
-      }
-
-      saveEvents(events);
-
-      renderCalendar(currentMonth);
-
-      eventModal.hide();
-    });
-
-  // Eliminar evento
-  document.getElementById("deleteEvent")
-    .addEventListener("click", ()=>{
-
-      const events = getEvents();
-
-      delete events[selectedDateKey];
-
-      saveEvents(events);
-
-      renderCalendar(currentMonth);
-
-      eventModal.hide();
-    });
-
-  // Selector mes
-  monthSelector.addEventListener("change",(e)=>{
-
-    currentMonth = parseInt(e.target.value);
-
-    renderCalendar(currentMonth);
-  });
-
-  // Navegación
-  document.getElementById("prevMonth")
-    .addEventListener("click", ()=>{
-
-      currentMonth--;
-
-      if(currentMonth < 0){
-        currentMonth = 11;
-      }
-
-      monthSelector.value = currentMonth;
-
-      renderCalendar(currentMonth);
-    });
-
-  document.getElementById("nextMonth")
-    .addEventListener("click", ()=>{
-
-      currentMonth++;
-
-      if(currentMonth > 11){
-        currentMonth = 0;
-      }
-
-      monthSelector.value = currentMonth;
-
-      renderCalendar(currentMonth);
-    });
-
-  // Inicializar
-  renderCalendar(currentMonth);
+  // Inicial
+  generateCalendar(0);
 
 </script>
 
